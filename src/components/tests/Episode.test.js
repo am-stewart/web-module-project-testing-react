@@ -16,6 +16,24 @@ test("renders without error", () => {
   }} />);
 });
 
-test("renders the summary test passed as prop", ()=>{});
+test("renders the summary test passed as prop", ()=>{
+  //Arrange
+  render (<Episode episode={{summary: 'this is the summary'}}/>)
+  //Act
+  const summary = screen.queryByText(/this is the summary/i);
+  //Assert
+  expect(summary).toBeInTheDocument();
+  expect(summary).toBeTruthy();
+  expect(summary).toHaveTextContent(/this is the summary/i);
+});
 
-test("renders default image when image is not defined", ()=>{});
+test("renders default image when image is not defined", ()=>{
+  //Arrange
+  render(<Episode episode={{image: null}}/>)
+
+  //Act
+  const imgAlt = screen.queryByAltText('https://i.ibb.co/2FsfXqM/stranger-things.png')
+
+  //Assert
+  expect(imgAlt).toBeInTheDocument();
+});
